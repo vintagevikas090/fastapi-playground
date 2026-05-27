@@ -21,10 +21,3 @@ LocalSession = sessionmaker(
     autocommit = False, 
     autoflush= False
 )
-
-# try:
-#     with engine.connect():
-#         print('Database Connection Successful')
-# except Exception as e:
-#     print(f"Following Exception Occured")
-#     print(e)
