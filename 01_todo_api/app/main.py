@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from app.routes.tasks import router 
+from app.database import tables
 
 app = FastAPI()
 
@@ -8,3 +10,4 @@ def home():
         'message': 'To-Do API Running'
     }
 
+app.include_router(router)
