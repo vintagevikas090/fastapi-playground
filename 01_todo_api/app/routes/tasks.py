@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Path
 from app.database.connection import LocalSession
 from app.schema.task_schema import CreateTask, UpdateTask
 from sqlalchemy import text 
@@ -64,7 +64,7 @@ def get_all_task():
 
 # Get A Single Task
 @router.get('/tasks/{task_id}')
-def get_one_task(task_id):
+def get_one_task(task_id:int = Path(..., title='Task ID', description='Enter Task ID', example = 1 )):
     db = LocalSession()
     query = text(
         """
@@ -86,7 +86,8 @@ def get_one_task(task_id):
 
 # Update A Task 
 @router.put('/tasks/{task_id}')
-def update_task(task_id,  update_info : UpdateTask):
+def update_task(update_info : UpdateTask,
+                task_id : int = Path(..., title='Task ID', description='Enter Task ID', example = 1 )):
     db = LocalSession()
     query = text(
         """
@@ -125,7 +126,7 @@ def update_task(task_id,  update_info : UpdateTask):
 
 # Delete A Task
 @router.delete('/tasks/{task_id}')
-def delete_task(task_id):
+def delete_task(task_id : int = Path(..., title='Task ID', description='Enter Task ID', example = 1 )):
     db = LocalSession()
     query = text(
         """
@@ -165,7 +166,7 @@ def delete_task(task_id):
 
 # Mark A Task Status Complete
 @router.patch('/tasks/{task_id}')
-def mark_complete(task_id):
+def mark_complete(task_id : int = Path(..., title='Task ID', description='Enter Task ID', example = 1 )):
     db = LocalSession()
     query = text(
         """UPDATE task_table
