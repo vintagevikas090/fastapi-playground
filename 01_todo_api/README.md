@@ -41,6 +41,8 @@ A full-stack Task Management application built using **FastAPI**, **MySQL**, **S
 ---
 
 ## 📂 Project Structure
+
+```text
 01_todo_api/
 ├── app/
 │   ├── database/
@@ -58,9 +60,16 @@ A full-stack Task Management application built using **FastAPI**, **MySQL**, **S
 ├── frontend/
 │   └── streamlit_app.py
 │
+├── assets/
+│   ├── dashboard_pic1.png
+│   ├── dashboard_pic2.png
+│   ├── fastapi_swagger_docs.png
+│   └── todo_demo.webm
+│
 ├── .env
-├── requirements.txt
-└── README.md
+├── README.md
+└── requirements.txt
+```
 
 ---
 
