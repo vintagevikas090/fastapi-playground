@@ -17,7 +17,7 @@ class CreateTask(BaseModel):
     priority : Annotated[Literal['Low', 'Medium', 'High'], Field(
         title = 'Task Priority', 
         description='Enter Task Priority(Low, High, Medium)',
-        examples= ['Low', 'Medium', 'High']
+        example = 'Low'
     )]
 
 
@@ -37,7 +37,7 @@ class UpdateTask(BaseModel):
     priority : Annotated[Literal['Low', 'Medium', 'High'], Field(
         title = 'Task Priority', 
         description='Enter Task Priority(Low, High, Medium)',
-        examples= ['Low', 'Medium', 'High']
+        example = 'Low'
     )]
 
     completed: Annotated[bool, Field(
