@@ -4,7 +4,7 @@ from datetime import datetime
 import time
 
 st.set_page_config(
-    page_title= "Todo Task Manager", 
+    page_title= "📝Todo Task Manager", 
     layout='wide'
 )
 
@@ -16,13 +16,13 @@ BASE_URL = 'http://127.0.0.1:8000'
 
 # Making a Sidebar
 sidebar = st.sidebar
-sidebar.title('TODO APP')
+sidebar.title('📋TODO APP')
 # sidebar.markdown('----')
 sidebar.markdown('----')
 sidebar.header('Task Management System')
 sidebar.write(
     """
-    ## Features 
+    ## 🚀Features 
     - Create Tasks
     - View Tasks
     - Delete Tasks 
@@ -36,7 +36,7 @@ sidebar.write(
 # ======================================
 
 ## Input Area
-st.header('Create New Task')
+st.header('✍️Create New Task')
 with st.form('create_task', clear_on_submit=True):
     title = st.text_input(label = 'Task Title ')
     description = st.text_area(label = 'Task Description')
@@ -44,7 +44,7 @@ with st.form('create_task', clear_on_submit=True):
         label = 'Task Priority', 
         options = ['Low', 'Medium', 'High']
     )
-    create_task_button = st.form_submit_button('Create Task')
+    create_task_button = st.form_submit_button('➕ Create Task')
 
 if create_task_button:
     if title.strip() == '':
@@ -77,7 +77,7 @@ except Exception:
     st.error("Can't Connect to FastAPI Server. Make Sure Uvicorn is Running")
     st.stop()
 
-st.header('Tasks Information')
+st.header('📊Tasks Information')
 
 # ===========================================
 # TASK MATRICS SECTION
@@ -105,12 +105,21 @@ if len(tasks) == 0:
 else:
     all_tasks = []
     for task in tasks:
+
+        colored_priority = ''
+        if task['priority'] == 'High':
+            colored_priority = '🔴High'
+        elif task['priority'] == 'Medium':
+            colored_priority = '🟡Medium'
+        else:
+            colored_priority = '🟢Low'
+
         updated_colname_task = {
             'ID' : str(task['id']),
             'Title': task['title'], 
             'Description': task['description'],
-            'Priority' : task['priority'],
-            'Status': "Completed" if task['completed'] == 1 else 'Not Completed',
+            'Priority' : colored_priority,
+            'Status': "Completed✔️" if task['completed'] == 1 else 'Pending⌛',
             'Created At': datetime.fromisoformat(task['created_at'])
         }
         all_tasks.append(updated_colname_task)
@@ -127,7 +136,7 @@ st.divider()
 # TASK ACTION SECTION
 # ==============================
 
-st.header('Task Action')
+st.header('🛠️Task Action')
 if tasks:
     task_options = {f"{task['id']} - {task['title']}" : task['id'] for task in tasks}
 
@@ -141,7 +150,7 @@ if tasks:
     col1, col2 = st.columns(2)
 
     # col1 -> Mark Complete Button
-    mark_complete_button = col1.button('Mark Complete')
+    mark_complete_button = col1.button('✅Mark Complete')
     if mark_complete_button:
         complete_response = requests.patch(f'{BASE_URL}/tasks/{selected_task_id}')
         if complete_response.status_code == 200:
@@ -153,7 +162,7 @@ if tasks:
 
 
     # col2 -> Delete Button
-    del_button = col2.button('Delete Task')
+    del_button = col2.button('🗑️Delete Task')
     if del_button:
         del_response = requests.delete(f'{BASE_URL}/tasks/{selected_task_id}')
         if del_response.status_code == 200:
