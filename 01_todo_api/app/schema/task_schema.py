@@ -3,7 +3,7 @@ from typing import Annotated, Literal
 
 class CreateTask(BaseModel):
     title : Annotated[str, Field(
-        min_length=5, title = 'Task Title', 
+        min_length=3, title = 'Task Title', 
         description='Enter the Title Name for the Task(minimum 5 Characters)', 
         example = 'GenAI Seminar'
     )]
@@ -23,7 +23,7 @@ class CreateTask(BaseModel):
 
 class UpdateTask(BaseModel):
     title : Annotated[str, Field(
-        min_length=5, title = 'Task Title', 
+        min_length=3, title = 'Task Title', 
         description='Enter the Title Name for the Task(minimum 5 Characters)', 
         example = 'GenAI Seminar'
     )]
